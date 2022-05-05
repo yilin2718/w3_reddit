@@ -1,17 +1,14 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
-#https://pydantic-docs.helpmanual.io/usage/models/
-
+from transformers import pipeline
+# import config
 
 
 app = FastAPI()
 @app.get("/")
 def hello_world():
     return {"Hello": "yi"}
-
-from transformers import pipeline
-import config
 
 sentiment_model = pipeline("sentiment-analysis")
 
