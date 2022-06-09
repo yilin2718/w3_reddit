@@ -3,6 +3,7 @@ from typing import Optional
 from pydantic import BaseModel
 from transformers import pipeline
 # import config
+from utilities import download_blob
 
 
 app = FastAPI()
@@ -21,4 +22,7 @@ async def analyze_sentiment(username: str, text: str):
     user_inputted_sentiment = sentiment_model(text)
     return {f"USER: {username} TEXT: {text} SENTIMENT: {user_inputted_sentiment}"}
 
+@app.get("/fetchnewmodel")
+async def fetchnewmodel(): 
+    download_blob('mlops_vectorweaviate_capstone', 'ner_models/ner_model.jsonl','ner_model.jsonl')  
 
